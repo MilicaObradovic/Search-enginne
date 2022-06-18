@@ -1,3 +1,5 @@
+from parser import Parser
+
 class Node(object):
     def __init__(self, char):
         self._char = char
@@ -28,8 +30,8 @@ class Trie(object):
         if node._is_word:
             self.output.append({"word": (pre+node._char), "number": node._counter})
         
-        for child in node._children.values():
-            self.dfs(child, pre + node._char)
+        # for child in node._children.values():
+        #     self.dfs(child, pre + node._char)
 
     def search(self, word):
         node = self._root
@@ -37,19 +39,21 @@ class Trie(object):
             if c in node._children:
                 node = node._children[c]
             else:
-                return []
+                return False
 
         self.output = []
+        # print(node)
         self.dfs(node, word[:-1])
-        lista = []
+        dic = {"word": word , "number": 0}
         for i in self.output:
             if i["word"] == word:
-                lista.append(i)
-        return lista
+                dic["number"] = i["number"]
+        return dic
 
-# t = Trie("tt", "tt")
 # t.insert("param")
 # t.insert("par")
 # t.insert("par")
-# tt = t.search("par")
+# t.insert("1")
+# t.insert("1")
+# tt = t.search("1")
 # print(tt)

@@ -30,7 +30,6 @@ def zeljena_putanja():
 
     return nastavak
 
-
 def odabir_direktorijuma():
     string = "./documents"
     while True:
@@ -48,7 +47,6 @@ def odabir_direktorijuma():
         
     return string
         
-
 def list_files(startpath):
     graf = Graph(True)
     for path, dirs, files in os.walk(startpath):
@@ -65,15 +63,33 @@ def list_files(startpath):
             m = "."+j[61:]
             elem = graf.path_element(m)
             if elem != False:
-                ret = graf.insert_edge(i, elem)
+                graf.insert_edge(i, elem)
     return graf
                 
-
 string = odabir_direktorijuma()
 start = time.time()
 g = list_files(string)
 end = time.time()
-print('Evaluation time: '+str(round(end - start, 6)))
-print(g.edge_count())
-print(g.vertex_count())
-# print(g._outgoing)
+print('Time: '+str(round(end - start, 6)))
+# print(g.edge_count())
+# print(g.vertex_count())
+# napraviti glavni meni koji ze imati petlju i praviti te uslove iz zahteva
+
+def search(graf):
+    word = input("Unesite rec za pretragu: ")
+    main_dict = {}
+    start2 = time.time()
+    for i in graf._incoming.keys():
+        rang = i.get_rang(word)
+        if rang != False:
+            # for j in i.keys():
+            #     link_rang = j.get_rang(word)
+            #     rang += 0.1 *link_rang
+            main_dict[i._path] = rang 
+    end2 = time.time()
+    print('Time2: '+str(round(end2 - start2, 6)))
+    print(main_dict)
+    
+search(g)
+
+

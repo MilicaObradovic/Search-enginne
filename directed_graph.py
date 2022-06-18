@@ -15,6 +15,15 @@ class Graph:
     def element(self):
       """Vraća element vezan za čvor grafa."""
       return self._element
+
+    def get_rang(self, word):
+        # element = trie stablo
+        ret = self._element.search(word)
+        # print(ret)
+        if ret != False:
+          return ret["number"]
+        else:
+          return False
   
     def __hash__(self):         # omogućava da Vertex bude ključ mape
       return hash(id(self))
@@ -143,9 +152,7 @@ class Graph:
     Baca ValueError ako u i v nisu čvorovi grafa.
     Baca ValueError ako su u i v već povezani.
     """
-    if self.get_edge(u, v) is None:      # uključuje i proveru greške
-    #   raise ValueError('u and v are already adjacent')
-    #   return False
-      e = self.Edge(u, v, x)
-      self._outgoing[u][v] = e
-      self._incoming[v][u] = e
+    # if self.get_edge(u, v) is None:      # uključuje i proveru greške
+    e = self.Edge(u, v, x)
+    self._outgoing[u][v] = e
+    self._incoming[v][u] = e
