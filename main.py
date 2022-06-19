@@ -56,6 +56,10 @@ def list_files(startpath):
                 links, words = parser.parse(path+"/"+f)
                 t = Trie()
                 for word in words:
+                    try:
+                        int(word)
+                    except ValueError:
+                        word = word.lower()
                     t.insert(word)
                 graf.insert_vertex(t, path+"/"+f, links)
     for i in graf._outgoing.keys():
@@ -75,21 +79,38 @@ print('Time: '+str(round(end - start, 6)))
 # print(g.vertex_count())
 # napraviti glavni meni koji ze imati petlju i praviti te uslove iz zahteva
 
+def insertion_sort(array):
+    for i in range(1, len(array)):
+        current = array[i]
+        # print(current)
+        pos = i
+        while pos > 0 and array[pos-1]["rang"] < current["rang"]:
+            array[pos] = array[pos-1]
+            pos = pos - 1
+        array[pos] = current
+
+def print_top(array, num):
+    for i in range(num):
+        print(str(i+1)+". "+ array[i]["path"][12:]+" - "+ str(round(array[i]["rang"],2)))
+
 def search(graf):
     word = input("Unesite rec za pretragu: ")
-    main_dict = {}
+    main = []
     start2 = time.time()
     for i in graf._incoming.keys():
         rang = i.get_rang(word)
         if rang != False:
-            # for j in i.keys():
-            #     link_rang = j.get_rang(word)
-            #     rang += 0.1 *link_rang
-            main_dict[i._path] = rang 
+            # ako nema reci u dokumentu ne proveravati ni linkove
+            for j in graf._incoming[i].keys():
+                link_rang = j.get_rang(word)
+                if link_rang != False:
+                    rang += 0.05 *link_rang
+            main.append({"path": i._path, "rang": rang })
     end2 = time.time()
     print('Time2: '+str(round(end2 - start2, 6)))
-    print(main_dict)
+    # print(main)
+    insertion_sort(main)
+    print_top(main, 5)
     
 search(g)
-
 

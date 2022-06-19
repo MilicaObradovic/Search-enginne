@@ -83,7 +83,16 @@ class Parser(HTMLParser):
 
 # p = Parser()
 # links, words = p.parse("./documents/about.html")
+# print(words)
 
 # print(links)
 # print(" ooooo   ")
 # print(links[0][61:])
+# try:
+#     int("str")
+# except ValueError:
+#     print("nista")
+# word = "AAA"
+# print(word.lower())
+# res = isinstance("1111", str)
+# print(type("111"))

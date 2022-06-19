@@ -1,3 +1,5 @@
-)
-# print(string)
-# list_files(string)
+
+# start = time.time()
+# g = list_files(string)
+# end = time.time()
+# print('Time: '+str(round(end - start, 6)))
