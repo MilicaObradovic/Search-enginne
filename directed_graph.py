@@ -20,10 +20,10 @@ class Graph:
         # element = trie stablo
         ret = self._element.search(word)
         # print(ret)
-        if ret != False:
+        if ret != 0:
           return ret["number"]
         else:
-          return False
+          return 0
   
     def __hash__(self):         # omogućava da Vertex bude ključ mape
       return hash(id(self))

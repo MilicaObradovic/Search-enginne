@@ -39,7 +39,7 @@ class Trie(object):
             if c in node._children:
                 node = node._children[c]
             else:
-                return False
+                return 0
 
         self.output = []
         # print(node)
