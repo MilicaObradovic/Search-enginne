@@ -4,7 +4,6 @@ import os
 import operator
 from html.parser import HTMLParser
 
-
 class Parser(HTMLParser):
     """
     Parser HTML dokumenata
@@ -80,4 +79,3 @@ class Parser(HTMLParser):
             print(e)
         finally:
             return self.links, self.words
-

@@ -9,16 +9,12 @@ def postojeci_dir(string, dirw):
     files = os.listdir(string)
     new = []
     for file in files:
-        if "." in file:
-            if file[-5:] == ".html":
-                new.append(file[:-5])
-        else:
-            new.append(file)
+        new.append(file)
 
     if dirw in new:
         return True
     else:
-        print("Izabrali ste nepostojeci file")
+        print("Nemoguce biranje")
         return False
 
 def nevalidan_dir(string, dirw):
@@ -95,7 +91,6 @@ def list_files(startpath):
 def insertion_sort(array):
     for i in range(1, len(array)):
         current = array[i]
-        # print(current)
         pos = i
         while pos > 0 and array[pos-1]["rang"] < current["rang"]:
             array[pos] = array[pos-1]
@@ -151,9 +146,8 @@ def get_kontekst_op(path, word1, word2):
             int(t)
         except ValueError:
             t = t.lower()
-        # print(t)
         tr.insert(t)
-    # print(words)
+
     w1 = tr.search(word1)
     if w1 == 0:
         w1 = {"number": 0}
@@ -161,12 +155,9 @@ def get_kontekst_op(path, word1, word2):
     if w2 == 0:
         w2 = {"number": 0}
 
-    # print(w1, w2)
     if w1["number"] != 0:
-        # print("nasao", word1)
         x = word1
     elif w2["number"] != 0:
-        # print("nasao", word2)
         x = word2
 
     get_kontekst(path, x)
@@ -186,7 +177,6 @@ def get_kontekst_vise(path, words):
     for f in words:
         w = tr.search(f)
         if w != 0:
-            # print("nasao", f)
             get_kontekst(path, f)
             break
 
@@ -318,6 +308,13 @@ def upit_validation():
             if word2[1] in ["AND", "OR", "NOT"]:
                 print("Fali druga rec za upit sa operatorima!!")
                 fail = True
+        op = 0
+        for w in word2:
+            if w in ["AND", "OR", "NOT"]:
+                op += 1
+        if op >= 2:
+            print("Uneli ste previse logickih operatora!!")
+            fail = True
         if fail == False:
             break
     return word

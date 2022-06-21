@@ -29,9 +29,6 @@ class Trie(object):
     def dfs(self, node, pre):
         if node._is_word:
             self.output.append({"word": (pre+node._char), "number": node._counter})
-        
-        # for child in node._children.values():
-        #     self.dfs(child, pre + node._char)
 
     def search(self, word):
         node = self._root
@@ -42,18 +39,10 @@ class Trie(object):
                 return 0
 
         self.output = []
-        # print(node)
         self.dfs(node, word[:-1])
+
         dic = {"word": word , "number": 0}
         for i in self.output:
             if i["word"] == word:
                 dic["number"] = i["number"]
         return dic
-
-# t.insert("param")
-# t.insert("par")
-# t.insert("par")
-# t.insert("1")
-# t.insert("1")
-# tt = t.search("1")
-# print(tt)

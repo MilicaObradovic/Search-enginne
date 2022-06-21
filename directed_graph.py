@@ -1,7 +1,5 @@
 
 class Graph:
-  """ Reprezentacija jednostavnog grafa"""
-
   #------------------------- Ugnježdena klasa Vertex -------------------------
   class Vertex:
     """ Struktura koja predstavlja čvor grafa."""
@@ -56,7 +54,6 @@ class Graph:
       raise ValueError('v nije čvor ivice')
   
     def element(self):
-      """ Vraća element vezan za ivicu"""
       return self._element
   
     def __hash__(self):         # omogućava da Edge bude ključ mape
@@ -112,25 +109,6 @@ class Graph:
     self._validate_vertex(u)
     self._validate_vertex(v)
     return self._outgoing[u].get(v)
-
-  def degree(self, v, outgoing=True):   
-    """ Vraća stepen čvora - broj(odlaznih) ivica iz čvora v u grafu.
-
-    Ako je graf usmeren, opcioni parametar outgoing se koristi za brojanje dolaznih ivica.
-    """
-    self._validate_vertex(v)
-    adj = self._outgoing if outgoing else self._incoming
-    return len(adj[v])
-
-  def incident_edges(self, v, outgoing=True):   
-    """ Vraća sve (odlazne) ivice iz čvora v u grafu.
-
-    Ako je graf usmeren, opcioni parametar outgoing se koristi za brojanje dolaznih ivica.
-    """
-    self._validate_vertex(v)
-    adj = self._outgoing if outgoing else self._incoming
-    for edge in adj[v].values():
-      yield edge
 
   def insert_vertex(self, x, path, links):
     """ Ubacuje i vraća novi čvor (Vertex) sa elementom x"""
